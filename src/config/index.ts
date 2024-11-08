@@ -21,5 +21,6 @@ export const config = {
     networkName: process.env.BLOCKCHAIN_NETWORK || 'usesafe-network',
     channelName: process.env.BLOCKCHAIN_CHANNEL || 'certification-channel',
     chaincodeName: process.env.BLOCKCHAIN_CHAINCODE || 'certification-contract'
-  }
+  },
+  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000'
 };

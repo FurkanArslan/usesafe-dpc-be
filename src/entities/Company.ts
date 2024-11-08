@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from './User';
 import { Product } from './Product';
-import { Document } from './Document';
+import { CompanyDocument } from './CompanyDocument';
+import { CompanyAddress } from './CompanyAddress';
 
 @Entity('companies')
 export class Company {
@@ -12,7 +13,11 @@ export class Company {
   name!: string;
 
   @Column({ type: 'jsonb' })
-  taxInfo!: any;
+  taxInfo!: {
+    taxNumber: string;
+    tradeRegistryNo?: string;
+    mersisNo?: string;
+  };
 
   @Column({ default: false })
   status!: boolean;
@@ -23,8 +28,11 @@ export class Company {
   @OneToMany(() => Product, product => product.company)
   products!: Product[];
 
-  @OneToMany(() => Document, document => document.company)
-  documents!: Document[];
+  @OneToMany(() => CompanyDocument, document => document.company)
+  documents!: CompanyDocument[];
+
+  @OneToMany(() => CompanyAddress, address => address.company)
+  addresses!: CompanyAddress[];
 
   @CreateDateColumn()
   createdAt!: Date;
